@@ -1,0 +1,35 @@
+type Post {
+    id: ID!
+    author: String!
+    title: String!
+    content: String
+    votesCount: Int!
+    createdTime: String!
+    comments: [Comment]
+    commentsCount: Int!
+}
+
+type Comment {
+    id: ID!
+    author: String!
+    content: String!
+    upvoteCount: Int!
+    downvoteCount: Int!
+    createdTime: String!
+    postId: ID!
+}
+
+type Query {
+    posts: [Post!]!
+    post(id: ID!): Post
+    comments(postId: ID!): [Comment]!
+}
+
+type Mutation {
+    createPost(author: String!, title: String!, content: String): Post
+    createComment(postId: ID!, author: String!, content: String!): Comment!
+    upvotePost(postId: ID!): Post!
+    downvotePost(postId: ID!): Post!
+    upvoteComment(commentId: ID!): Comment!
+    downvoteComment(commentId: ID!): Comment!
+}
